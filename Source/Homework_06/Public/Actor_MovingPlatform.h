@@ -18,9 +18,9 @@ protected:
 	USceneComponent* SceneRoot;
 	UStaticMeshComponent* StaticMeshComp;
 
-	FVector StartLocation;
-	float MoveSpeed;
-	float MaxRange;
+	FVector StartLocation, CurrentLocation;
+	float MoveSpeed = 0.0f;
+	float MaxRange = 0.0f;
 
 private:	
 	virtual void Tick(float DeltaTime) override;

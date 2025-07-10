@@ -31,8 +31,5 @@ void AActor_RotationPlatform::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	
-
 	AddActorLocalRotation(FRotator(0.0f, RotationSpeed * DeltaTime, 0.0f));
 }
-
-
