@@ -18,9 +18,23 @@ protected:
 	USceneComponent* SceneRoot;
 	UStaticMeshComponent* StaticMeshComp;
 
-	FVector StartLocation, CurrentLocation;
-	float MoveSpeed = 0.0f;
-	float MaxRange = 0.0f;
+	FVector StartLocation = FVector(0.0f, 0.0f, 0.0f);
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Platform Setting")
+	FVector CurrentLocation = FVector(0.0f, 0.0f, 0.0f);
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Platform Setting")
+	FVector EndLocation = FVector(0.0f, 0.0f, 0.0f);
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Platform Setting")
+	FVector MaxRange = FVector(0.0f, 0.0f, 0.0f);
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Platform Setting")
+	FVector Direction = FVector(0.0f, 0.0f, 0.0f);
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Platform Setting")
+	FVector TargetOffset = FVector(300.0f, 0.0f, 0.0f);
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Platform Setting")
+	float MoveSpeed = 100.0f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Platform Setting")
+	bool bMovingForward = true;
 
 private:	
 	virtual void Tick(float DeltaTime) override;

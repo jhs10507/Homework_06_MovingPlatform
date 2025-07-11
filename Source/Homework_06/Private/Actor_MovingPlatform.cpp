@@ -8,7 +8,7 @@ AActor_MovingPlatform::AActor_MovingPlatform()
 	StaticMeshComp->SetupAttachment(SceneRoot);
 
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> MeshAsset(TEXT(
-		"/Game/Resources/Models/Misc/Moving_Platforms/SM_Moving_Platform_2m_01"
+		"/Game/Resources/Models/Misc/Moving_Platforms/SM_Moving_Platform_1m_01"
 	));
 	
 	if (MeshAsset.Succeeded())
@@ -29,32 +29,38 @@ AActor_MovingPlatform::AActor_MovingPlatform()
 	}
 
 	PrimaryActorTick.bCanEverTick = true;
+	MoveSpeed = 100.0f;
+	bMovingForward = true;
 }
 
 void AActor_MovingPlatform::BeginPlay()
 {
 	Super::BeginPlay();
 
-	//SetActorLocation(FVector(0.0f, 0.0f, 0.0f));
-	StartLocation = FVector(0.0f, 0.0f, 0.0f);
-	CurrentLocation = FVector(10.0f, 0.0f, 0.0f);
-	MoveSpeed = 10.0f;
-	MaxRange = 300.0f;
+	StartLocation = GetActorLocation();
+	EndLocation = StartLocation + TargetOffset;
 }
 
 void AActor_MovingPlatform::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	//FVector Velocity = CurrentLocation.GetSafeNormal() * MoveSpeed;
-	AddActorLocalOffset((CurrentLocation.GetSafeNormal() * MoveSpeed) *DeltaTime);
+	CurrentLocation = GetActorLocation();
+	Direction = bMovingForward ? (EndLocation - StartLocation).GetSafeNormal() : 
+		(StartLocation - EndLocation).GetSafeNormal();
+	float Distance = MoveSpeed * DeltaTime;
 
-	/*float Speed = 100;
-	FVector Direction = FVector(1, 1, 0);
-	FVector Velocity = Direction.GetSafeNormal() * Speed;
+	CurrentLocation += Direction * Distance;
+	SetActorLocation(CurrentLocation);
 
-	/*FVector Velocity = FVector(100,0,0); 
-	AddActorLocalOffset(Velocity * DeltaTime);*/
-
-	//AddActorLocalOffset((StartLocation + CurrentLocation.X) + (MoveSpeed * DeltaTime));
+	if (bMovingForward && FVector::Dist(CurrentLocation, EndLocation) < 1.0f)
+	{
+		bMovingForward = false;
+		//UE_LOG(LogTemp, Warning, TEXT("전진"));
+	}
+	else if (!bMovingForward && FVector::Dist(CurrentLocation, StartLocation) < 1.0f)
+	{
+		bMovingForward = true;
+		//UE_LOG(LogTemp, Warning, TEXT("후진"));
+	}
 }

@@ -8,7 +8,7 @@ AActor_RotationPlatform::AActor_RotationPlatform()
 	StaticMeshComp->SetupAttachment(SceneRoot);
 
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> MeshAsset(TEXT(
-		"/Game/Resources/Models/Misc/Moving_Platforms/SM_Moving_Platform_1m_01"
+		"/Game/Resources/Models/Misc/Moving_Platforms/SM_Moving_Platform_2m_01"
 	));
 	if (MeshAsset.Succeeded())
 	{
@@ -17,7 +17,7 @@ AActor_RotationPlatform::AActor_RotationPlatform()
 
 	PrimaryActorTick.bCanEverTick = true;
 
-	RotationSpeed = 10.0f;
+	RotationSpeed = 100.0f;
 }
 
 void AActor_RotationPlatform::BeginPlay()

@@ -19,7 +19,7 @@ protected:
 	UStaticMeshComponent* StaticMeshComp;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Platform Settings")
-	float RotationSpeed;
+	float RotationSpeed = 100.0f;
 
 private:	
 	virtual void Tick(float DeltaTime) override;
