@@ -12,14 +12,14 @@ class HOMEWORK_06_API AActor_RotationPlatform : public AActor
 public:	
 	AActor_RotationPlatform();
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Platform Settings")
+	float RotationSpeed = 100.0f;
+
 protected:
 	virtual void BeginPlay() override;
 
 	USceneComponent* SceneRoot;
 	UStaticMeshComponent* StaticMeshComp;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Platform Settings")
-	float RotationSpeed = 100.0f;
 
 private:	
 	virtual void Tick(float DeltaTime) override;

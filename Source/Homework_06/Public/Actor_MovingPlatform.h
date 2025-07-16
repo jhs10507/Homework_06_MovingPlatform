@@ -12,12 +12,6 @@ class HOMEWORK_06_API AActor_MovingPlatform : public AActor
 public:	
 	AActor_MovingPlatform();
 
-protected:
-	virtual void BeginPlay() override;
-
-	USceneComponent* SceneRoot;
-	UStaticMeshComponent* StaticMeshComp;
-
 	FVector StartLocation = FVector(0.0f, 0.0f, 0.0f);
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Platform Setting")
 	FVector CurrentLocation = FVector(0.0f, 0.0f, 0.0f);
@@ -35,6 +29,12 @@ protected:
 	float MoveSpeed = 100.0f;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Platform Setting")
 	bool bMovingForward = true;
+
+protected:
+	virtual void BeginPlay() override;
+
+	USceneComponent* SceneRoot;
+	UStaticMeshComponent* StaticMeshComp;
 
 private:	
 	virtual void Tick(float DeltaTime) override;
