@@ -39,6 +39,8 @@ void AActor_MovingPlatform::BeginPlay()
 
 	StartLocation = GetActorLocation();
 	EndLocation = StartLocation + TargetOffset;
+
+	GetWorld()->GetTimerManager().SetTimer(TimeEventHandle, this, &ThisClass::TimeEvent, 2.0f, true);
 }
 
 void AActor_MovingPlatform::Tick(float DeltaTime)
@@ -62,5 +64,14 @@ void AActor_MovingPlatform::Tick(float DeltaTime)
 	{
 		bMovingForward = true;
 		//UE_LOG(LogTemp, Warning, TEXT("후진"));
+	}
+}
+
+void AActor_MovingPlatform::TimeEvent()
+{
+	if (StaticMeshComp)
+	{
+		bool MeshHide = FMath::RandBool();
+		StaticMeshComp->SetVisibility(MeshHide);
 	}
 }

@@ -38,4 +38,8 @@ protected:
 
 private:	
 	virtual void Tick(float DeltaTime) override;
+
+	void TimeEvent();
+
+	FTimerHandle TimeEventHandle;
 };
